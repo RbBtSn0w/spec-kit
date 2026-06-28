@@ -125,6 +125,7 @@ class TestInitIntegrationFlag:
         from typer.testing import CliRunner
         from specify_cli import app
         import specify_cli.commands.init as init_mod
+        import specify_cli.adg_bridge as adg_mod
 
         called_provision = False
 
@@ -135,6 +136,7 @@ class TestInitIntegrationFlag:
             return False
 
         monkeypatch.setattr(init_mod, "_provision_plugin_skills", mock_provision)
+        monkeypatch.setattr(adg_mod, "find_adg", lambda: "/mocked/path/to/adg")
 
         runner = CliRunner()
         project = tmp_path / "plugin-default-test"
